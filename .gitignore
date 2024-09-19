@@ -1,0 +1,5 @@
+# Ignore specific file in config folder
+config/config.py
+
+# Ignore specific file in datasets folder
+datasets/yelp_academic_dataset_review.json
