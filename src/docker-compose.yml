@@ -15,6 +15,7 @@ services:
       - ./requirements.txt:/requirements.txt
     ports:
       - "9090:8080"
+      #Have to allow that port on the docker it seems its correcting the issues.
       - "7077:7077"
     networks:
       - code-with-yu
