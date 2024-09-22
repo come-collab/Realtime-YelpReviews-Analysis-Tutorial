@@ -11,8 +11,8 @@ def start_streaming(spark):
          StructField("user_id",StringType()),
          StructField("business_id", StringType()),
          StructField("stars",FloatType()),
-         StructField("date",FloatType()),
-         StructField("text",FloatType())
+         StructField("date",StringType()),
+         StructField("text",StringType())
       ])
 
       stream_df = stream_df.select(from_json(col('value'), schema).alias("data")).select(("data.*"))
