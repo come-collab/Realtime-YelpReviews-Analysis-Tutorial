@@ -3,7 +3,7 @@ import socket
 import time
 import pandas as pd
 
-def send_data_over_socket(file_path, host='127.0.0.1', port=9999, chunk_size=5):
+def send_data_over_socket(file_path, host='127.0.0.1', port=9999, chunk_size=2):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((host, port))
     s.listen(1)
@@ -14,7 +14,7 @@ def send_data_over_socket(file_path, host='127.0.0.1', port=9999, chunk_size=5):
     while True:
         conn, addr = s.accept()
         print(f"Connection from {addr}")
-        
+
         try:
             with open(file_path, 'rb') as file:
                 records = []
@@ -26,7 +26,7 @@ def send_data_over_socket(file_path, host='127.0.0.1', port=9999, chunk_size=5):
                         for record in chunk.to_dict(orient='records'):
                             serialize_data = json.dumps(record).encode('utf-8')
                             conn.send(serialize_data + b'\n')
-                            time.sleep(1)  # Reduced sleep for faster testing
+                            time.sleep(5)  # Reduced sleep for faster testing
                         records = []
         except (BrokenPipeError, ConnectionResetError):
             print("Client disconnected")
