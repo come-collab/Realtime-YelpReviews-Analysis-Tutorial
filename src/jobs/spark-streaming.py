@@ -4,6 +4,8 @@ from pyspark.sql.types import StructField, StructType, StringType,FloatType
 from pyspark.sql.functions import from_json, col, to_json, struct
 from config.config import config
 from confluent_kafka import Producer, Consumer
+import time 
+
 
 def start_streaming(spark):
    topic = 'Review'
@@ -39,7 +41,8 @@ def start_streaming(spark):
                 )
       
    except Exception as e :
-      print(e)
+      print(f'Exception encountedred : {e}. Retrying in 10 seconds')
+      time.sleep(10)
 
 
 if __name__ == "__main__":
